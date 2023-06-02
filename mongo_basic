@@ -1,0 +1,319 @@
+student@student-Veriton-M200-H61:~$ mongo
+MongoDB shell version v3.6.8
+connecting to: mongodb://127.0.0.1:27017
+Implicit session: session { "id" : UUID("ecc44de1-7c86-4413-b300-5d87ca59f889") }
+MongoDB server version: 3.6.8
+Server has startup warnings: 
+2023-05-03T10:03:03.222+0530 I STORAGE  [initandlisten] 
+2023-05-03T10:03:03.222+0530 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2023-05-03T10:03:03.222+0530 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2023-05-03T10:03:15.955+0530 I CONTROL  [initandlisten] 
+2023-05-03T10:03:15.955+0530 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2023-05-03T10:03:15.955+0530 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2023-05-03T10:03:15.955+0530 I CONTROL  [initandlisten] 
+> show dbs
+admin        0.000GB
+collegefees  0.000GB
+config       0.000GB
+dbs          0.000GB
+employee     0.000GB
+jishan       0.000GB
+local        0.000GB
+mongodb      0.000GB
+product      0.000GB
+srd          0.000GB
+> use as1
+switched to db as1
+> ;
+> show collection;
+2023-05-03T10:06:07.723+0530 E QUERY    [thread1] Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:997:11
+shellHelper@src/mongo/shell/utils.js:750:15
+@(shellhelp2):1:1
+> show collections;
+> db.student.insert({sroll:08,sname:"soham",gender:"male",sprn:08)};
+2023-05-03T10:13:58.119+0530 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):1:63
+> db.student.insert({sroll:08,sname:"soham",gender:"male",sprn:08)};
+2023-05-03T10:15:46.639+0530 E QUERY    [thread1] SyntaxError: missing } after property list @(shell):1:63
+> db.student.insert({sroll:08,sname:"soham",gender:"male",sprn:08});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({sroll:10,sname:"yash",gender:"male",sprn:10},{sroll:09,sdept:"comp",skillset:["c","c++","DBMS"]});
+WriteResult({ "nInserted" : 1 })
+> db.student.find();
+{ "_id" : ObjectId("6451e708fd41fba44ef438fa"), "sroll" : 8, "sname" : "soham", "gender" : "male", "sprn" : 8 }
+{ "_id" : ObjectId("6451e839fd41fba44ef438fb"), "sroll" : 10, "sname" : "yash", "gender" : "male", "sprn" : 10 }
+> db.student.insert({sroll:10,sname:"yash",gender:"male",sprn:10},{sroll:09,sdept:"comp",skillset:["c","c++","DBMS"]});
+WriteResult({ "nInserted" : 1 })
+> db.student.find();
+{ "_id" : ObjectId("6451e708fd41fba44ef438fa"), "sroll" : 8, "sname" : "soham", "gender" : "male", "sprn" : 8 }
+{ "_id" : ObjectId("6451e839fd41fba44ef438fb"), "sroll" : 10, "sname" : "yash", "gender" : "male", "sprn" : 10 }
+{ "_id" : ObjectId("6451e8bafd41fba44ef438fc"), "sroll" : 10, "sname" : "yash", "gender" : "male", "sprn" : 10 }
+> db.student.insert({sroll:09,sdept:"comp",skillset:["c","c++","DBMS"]});
+WriteResult({ "nInserted" : 1 })
+> db.student.find();
+{ "_id" : ObjectId("6451e708fd41fba44ef438fa"), "sroll" : 8, "sname" : "soham", "gender" : "male", "sprn" : 8 }
+{ "_id" : ObjectId("6451e839fd41fba44ef438fb"), "sroll" : 10, "sname" : "yash", "gender" : "male", "sprn" : 10 }
+{ "_id" : ObjectId("6451e8bafd41fba44ef438fc"), "sroll" : 10, "sname" : "yash", "gender" : "male", "sprn" : 10 }
+{ "_id" : ObjectId("6451ea9afd41fba44ef438fd"), "sroll" : 9, "sdept" : "comp", "skillset" : [ "c", "c++", "DBMS" ] }
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451e708fd41fba44ef438fa"),
+	"sroll" : 8,
+	"sname" : "soham",
+	"gender" : "male",
+	"sprn" : 8
+}
+{
+	"_id" : ObjectId("6451e839fd41fba44ef438fb"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451e8bafd41fba44ef438fc"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+> db.student.find({sroll:08});
+{ "_id" : ObjectId("6451e708fd41fba44ef438fa"), "sroll" : 8, "sname" : "soham", "gender" : "male", "sprn" : 8 }
+> db.student.find({sroll:08}).pretty();
+{
+	"_id" : ObjectId("6451e708fd41fba44ef438fa"),
+	"sroll" : 8,
+	"sname" : "soham",
+	"gender" : "male",
+	"sprn" : 8
+}
+> db.student.remove({sroll:8});
+WriteResult({ "nRemoved" : 1 })
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451e839fd41fba44ef438fb"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451e8bafd41fba44ef438fc"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+> db.student.remove({sroll:10});
+WriteResult({ "nRemoved" : 2 })
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+> db.student.insert({sroll:10,sname:"yash",gender:"male",sprn:10},{sroll:09,sdept:"comp",skillset:["c","c++","DBMS"]});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({sroll:08,sname:"soham",gender:"male",sprn:08});
+WriteResult({ "nInserted" : 1 })
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+{
+	"_id" : ObjectId("6451ebc2fd41fba44ef438fe"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451ebd4fd41fba44ef438ff"),
+	"sroll" : 8,
+	"sname" : "soham",
+	"gender" : "male",
+	"sprn" : 8
+}
+> db.student.updateOne({sroll:08},{$set:{sprn:11}});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+{
+	"_id" : ObjectId("6451ebc2fd41fba44ef438fe"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451ebd4fd41fba44ef438ff"),
+	"sroll" : 8,
+	"sname" : "soham",
+	"gender" : "male",
+	"sprn" : 11
+}
+> db.student.insertMany([{sroll:11,sname:"xyz",gender:"male",sprn:08},{sroll:12,sname:"abc",gender:"female",sprn:12}]);
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("6451f1cefd41fba44ef43900"),
+		ObjectId("6451f1cefd41fba44ef43901")
+	]
+}
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+{
+	"_id" : ObjectId("6451ebc2fd41fba44ef438fe"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451ebd4fd41fba44ef438ff"),
+	"sroll" : 8,
+	"sname" : "soham",
+	"gender" : "male",
+	"sprn" : 11
+}
+{
+	"_id" : ObjectId("6451f1cefd41fba44ef43900"),
+	"sroll" : 11,
+	"sname" : "xyz",
+	"gender" : "male",
+	"sprn" : 8
+}
+{
+	"_id" : ObjectId("6451f1cefd41fba44ef43901"),
+	"sroll" : 12,
+	"sname" : "abc",
+	"gender" : "female",
+	"sprn" : 12
+}
+> db.student.replaceOne({sroll:11},{sname:"sai"});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+{
+	"_id" : ObjectId("6451ebc2fd41fba44ef438fe"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451ebd4fd41fba44ef438ff"),
+	"sroll" : 8,
+	"sname" : "soham",
+	"gender" : "male",
+	"sprn" : 11
+}
+{ "_id" : ObjectId("6451f1cefd41fba44ef43900"), "sname" : "sai" }
+{
+	"_id" : ObjectId("6451f1cefd41fba44ef43901"),
+	"sroll" : 12,
+	"sname" : "abc",
+	"gender" : "female",
+	"sprn" : 12
+}
+> db.student.replaceOne({sname:"sai"},{sroll:11,sname:"sai",gender:"Male",sprn:08});
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find().pretty();
+{
+	"_id" : ObjectId("6451ea9afd41fba44ef438fd"),
+	"sroll" : 9,
+	"sdept" : "comp",
+	"skillset" : [
+		"c",
+		"c++",
+		"DBMS"
+	]
+}
+{
+	"_id" : ObjectId("6451ebc2fd41fba44ef438fe"),
+	"sroll" : 10,
+	"sname" : "yash",
+	"gender" : "male",
+	"sprn" : 10
+}
+{
+	"_id" : ObjectId("6451ebd4fd41fba44ef438ff"),
+	"sroll" : 8,
+	"sname" : "soham",
+	"gender" : "male",
+	"sprn" : 11
+}
+{
+	"_id" : ObjectId("6451f1cefd41fba44ef43900"),
+	"sroll" : 11,
+	"sname" : "sai",
+	"gender" : "Male",
+	"sprn" : 8
+}
+{
+	"_id" : ObjectId("6451f1cefd41fba44ef43901"),
+	"sroll" : 12,
+	"sname" : "abc",
+	"gender" : "female",
+	"sprn" : 12
+}
+
